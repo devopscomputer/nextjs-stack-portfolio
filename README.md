@@ -36,76 +36,41 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 # 🚀 Tech Lead Skill Dashboard
-Tech Lead Skill Dashboard é um painel interativo, responsivo e altamente visual que apresenta o domínio técnico de um profissional sênior em tecnologia. O projeto combina gráficos dinâmicos, animações sofisticadas e integração com o GitHub para representar com precisão as habilidades técnicas, métricas de produtividade e expertise arquitetural de um Tech Lead.
 
-🧠 Funcionalidades Avançadas
-🎯 Visualização analítica de skills por meio de gráficos circulares, radiais e de linha.
-📊 Gráficos dinâmicos com Chart.js & Recharts para representar evolução e distribuição de habilidades.
-🔁 Integração real com a GitHub API, exibindo projetos, estrelas, linguagens e tendências.
-🧩 Sidebar interativa e futurista, com transições suaves, efeitos de glow e navegação entre seções.
-🚀 Scroll infinito animado de repositórios usando CardProject com controle de direção e pausa.
-🌐 Visual responsivo, compatível com desktops widescreen e otimizado para escalabilidade.
-💡 UI com design neon + glassmorphism, simulando dashboards modernos estilo DevOps e portfólios de liderança.
+Este projeto é um dashboard visual e interativo para exibir habilidades técnicas e analíticas de um Tech Lead, com foco em UX futurista, integração dinâmica e análise visual de desempenho.
 
-🧪 Tecnologias Aplicadas
-Next.js + React: Estrutura SSR com foco em performance e modularidade.
-TypeScript: Tipagem avançada para segurança e escalabilidade do código.
-TailwindCSS: Estilização de alto desempenho com classes utilitárias modernas.
-Framer Motion: Animações suaves e responsivas com base em estados.
-Chart.js + Recharts: Gráficos de linha, área e radar com efeitos visuais e gradientes.
-Styled-components: Customização CSS avançada, aplicada no componente ReactIcon.
-GitHub API: Consumo em tempo real para listar e mapear repositórios e linguagens.
+## 🧩 Funcionalidades
 
-📐 Metodologias e Arquitetura
+- 📊 Gráficos dinâmicos com **Chart.js** e **Recharts**
+- 🧠 Visualização de skills com **progresso circular animado**
+- 🔁 Scroll contínuo de repositórios GitHub com análise por linguagem
+- 🌐 **Sidebar inteligente** com navegação seccional
+- 🧪 Destaque para áreas como React.js, Node.js, Next.js, TypeScript, PostgreSQL, Cloud e Arquitetura
+- 💫 Estilo visual com **glow, blur, dark mode** e animações
 
-Componentização Avançada: Separação de responsabilidades (Charts, CardSkill, Sidebar, CardProject).
-Clean Architecture: Organização clara e modular para escalar o projeto futuramente.
-Motion-First Design: Animações nativas baseadas em interações (hover, scroll, tempo).
-Mobile Responsiveness (em progresso): Design pensado para escalabilidade visual.
-Design System Visual Futurista: Baseado em conceitos de neon, vidro e sombra dinâmica.
+## 🛠️ Tecnologias
 
-📁 Estrutura de Componentes
-Componente	Função
-Dashboard.tsx	Painel principal com integração de charts, radar e skills
+- **React + Next.js**
+- **TypeScript**
+- **TailwindCSS**
+- **Framer Motion**
+- **Chart.js + Recharts**
+- **Styled-components**
+- **GitHub API**
 
-ChartSkill.tsx	Cards com ícones e progresso circular animado (com CircleProgress)
-Chart.tsx	Gráfico de linha com distribuições técnicas e tooltip customizado
-Charts.tsx	Gráfico de área com métricas diárias (ações, commits, queries)
-MiniCard.tsx	Scroll animado de mini repositórios com hover glow
-CardProject.tsx	Scroll horizontal automático e manual dos repositórios do GitHub
-SideBar.tsx	Menu lateral com navegação temática, avatar e links funcionais
-ReactIcon.tsx	Efeito visual animado do símbolo do React com CSS via styled-components
-CardSkill.tsx	Alternativa de exibição detalhada das skills (substituído por radar)
+## 📁 Estrutura
 
-🌍 Deploy & Uso
-Este projeto pode ser facilmente publicado no Vercel, Netlify ou GitHub Pages via Next.js export estático.
+- `Dashboard.tsx`: Componente central da visualização
+- `ChartSkill.tsx`: Cards de skill com progresso circular
+- `Chart.tsx` & `Charts.tsx`: Gráficos de linha e área com animações
+- `MiniCard.tsx` & `CardProject.tsx`: Scroll de repositórios do GitHub
+- `Sidebar.tsx`: Menu lateral responsivo
+- `ReactIcon.tsx`: Animação inspirada no logo do React com styled-components
 
-bash
-Copiar
-Editar
-# Instalação
-yarn install
+## 📎 Sobre
 
-# Desenvolvimento local
-yarn dev
+Este projeto é parte de um portfólio pessoal e demonstra habilidades de um Tech Lead moderno, com foco em arquitetura escalável, liderança técnica, visual avançado e integração em tempo real.
 
-# Build para produção
-yarn build
-yarn start
-📌 Você pode adicionar variáveis como GITHUB_USERNAME para tornar a integração dinâmica por ambiente.
+---
 
-🏆 Ideal para...
-Portfólios técnicos de desenvolvedores sêniores
-Demonstrações de habilidades analíticas em entrevistas
-Apresentações de arquitetura e liderança técnica
-Showcase para equipes de DevOps, Fullstack e Engenharia de Software
-
-🧬 Exemplo de stack exibida no radar:
-React.js, Next.js, Node.js, TypeScript, PostgreSQL
-C#, Python, Java, Docker, GitHub Actions, Cloud
-Arquitetura de Software, QA Lead, Backend e Frontend
-
-📎 Autor
-Desenvolvido por @devopscomputer com foco em excelência visual e técnica.
-Conceito de Tech Lead com experiência em múltiplas stacks, arquitetura moderna e engenharia de software de alto nível.
-
+> 💡 Quer ver ao vivo? [Link para o deploy (caso você publique)](https://...)
