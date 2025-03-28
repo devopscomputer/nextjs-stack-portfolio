@@ -1,26 +1,111 @@
+/* Importa as diretivas base do TailwindCSS */
+
 @import "tailwindcss";
 
+/* Variáveis padrão para modo claro */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff;  /* Fundo branco */
+  --foreground: #171717;  /* Texto escuro */
 }
 
+/* Define temas inline com base nas variáveis */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);   /* Cor de fundo base */
+  --color-foreground: var(--foreground);   /* Cor de texto base */
+  --font-sans: var(--font-geist-sans);     /* Fonte primária sans-serif */
+  --font-mono: var(--font-geist-mono);     /* Fonte monoespaçada */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+
+@layer utilities {
+  .neon-glow {
+    @apply shadow-[0_0_20px_rgba(0,255,150,0.4)] border-x-2 border-green-300 bg-white/10;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
+
+
+a.text-verde-300 {
+  color: #66f0cb; /* Cor verde-300 definida no Tailwind */
+}
+
+
+/* Regras para modo escuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a; /* Fundo preto futurista */
+    --foreground: #ededed; /* Texto claro para contraste */
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 255, 150, 0.2), 0 0 20px rgba(0, 255, 150, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 255, 150, 0.5), 0 0 40px rgba(0, 255, 150, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.2s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out both;
+}
+
+@layer utilities {
+  .glow-circle {
+    filter: drop-shadow(0 0 6px #00ff99);
+  }
+}
+
+/* Estilização global do body */
+body {
+  background: var(--background);         /* Usa cor de fundo definida nas variáveis */
+  color: var(--foreground);             /* Usa cor de texto definida nas variáveis */
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif; /* Fonte moderna */
+  transition: background 0.3s ease, color 0.3s ease; /* Suaviza a transição ao trocar tema */
+}
+
+// Adicione isso no seu CSS global ou dentro de uma class extendida via Tailwind config
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out both;
+}
+
+
