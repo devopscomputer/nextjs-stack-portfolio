@@ -57,6 +57,7 @@ Styled-components: Customização CSS avançada, aplicada no componente ReactIco
 GitHub API: Consumo em tempo real para listar e mapear repositórios e linguagens.
 
 📐 Metodologias e Arquitetura
+
 Componentização Avançada: Separação de responsabilidades (Charts, CardSkill, Sidebar, CardProject).
 Clean Architecture: Organização clara e modular para escalar o projeto futuramente.
 Motion-First Design: Animações nativas baseadas em interações (hover, scroll, tempo).
@@ -66,6 +67,7 @@ Design System Visual Futurista: Baseado em conceitos de neon, vidro e sombra din
 📁 Estrutura de Componentes
 Componente	Função
 Dashboard.tsx	Painel principal com integração de charts, radar e skills
+
 ChartSkill.tsx	Cards com ícones e progresso circular animado (com CircleProgress)
 Chart.tsx	Gráfico de linha com distribuições técnicas e tooltip customizado
 Charts.tsx	Gráfico de área com métricas diárias (ações, commits, queries)
@@ -74,6 +76,7 @@ CardProject.tsx	Scroll horizontal automático e manual dos repositórios do GitH
 SideBar.tsx	Menu lateral com navegação temática, avatar e links funcionais
 ReactIcon.tsx	Efeito visual animado do símbolo do React com CSS via styled-components
 CardSkill.tsx	Alternativa de exibição detalhada das skills (substituído por radar)
+
 🌍 Deploy & Uso
 Este projeto pode ser facilmente publicado no Vercel, Netlify ou GitHub Pages via Next.js export estático.
 
