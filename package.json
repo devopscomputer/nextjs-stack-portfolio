@@ -2,12 +2,14 @@
   "name": "dev-port",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+"scripts": {
+  "dev": "next dev",
+  "build": "next build --no-lint",
+  "start": "next start",
+  "lint": "next lint",
+  "deploy": "cross-env DEPLOY_ENV=GH_PAGES npm run build",
+  "build:gh": "cross-env DEPLOY_ENV=GH_PAGES next build --no-lint"
+},
   "dependencies": {
     "@next/font": "^14.2.15",
     "chart.js": "^4.4.8",
@@ -36,6 +38,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "cross-env": "^7.0.3"
   }
 }

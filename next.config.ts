@@ -2,10 +2,11 @@
 import type { NextConfig } from "next";
 import type { Configuration } from "webpack";
 
-// Detecta se é deploy para GitHub Pages
-const isGithubPages = process.env.DEPLOY_ENV === 'GH_PAGES';
+const isGithubPages = process.env.DEPLOY_ENV === "GH_PAGES";
 
 const nextConfig: NextConfig = {
+  output: "export", // ativa next export
+
   experimental: {
     forceSwcTransforms: true,
   },
@@ -27,9 +28,9 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Configurações para GitHub Pages
-  assetPrefix: isGithubPages ? '/nextjs-stack-portfolio/' : '',
-  basePath: isGithubPages ? '/nextjs-stack-portfolio' : '',
+  // ESSENCIAL para funcionar no GitHub Pages
+  assetPrefix: isGithubPages ? "/nextjs-stack-portfolio/" : "",
+  basePath: isGithubPages ? "/nextjs-stack-portfolio" : "",
   trailingSlash: true,
 
   webpack(config: Configuration, { isServer }: { isServer: boolean }) {
