@@ -40,43 +40,27 @@ Tech Lead Skill Dashboard é um painel interativo, responsivo e altamente visual
 
 🧠 Funcionalidades Avançadas
 🎯 Visualização analítica de skills por meio de gráficos circulares, radiais e de linha.
-
 📊 Gráficos dinâmicos com Chart.js & Recharts para representar evolução e distribuição de habilidades.
-
 🔁 Integração real com a GitHub API, exibindo projetos, estrelas, linguagens e tendências.
-
 🧩 Sidebar interativa e futurista, com transições suaves, efeitos de glow e navegação entre seções.
-
 🚀 Scroll infinito animado de repositórios usando CardProject com controle de direção e pausa.
-
 🌐 Visual responsivo, compatível com desktops widescreen e otimizado para escalabilidade.
-
 💡 UI com design neon + glassmorphism, simulando dashboards modernos estilo DevOps e portfólios de liderança.
 
 🧪 Tecnologias Aplicadas
 Next.js + React: Estrutura SSR com foco em performance e modularidade.
-
 TypeScript: Tipagem avançada para segurança e escalabilidade do código.
-
 TailwindCSS: Estilização de alto desempenho com classes utilitárias modernas.
-
 Framer Motion: Animações suaves e responsivas com base em estados.
-
 Chart.js + Recharts: Gráficos de linha, área e radar com efeitos visuais e gradientes.
-
 Styled-components: Customização CSS avançada, aplicada no componente ReactIcon.
-
 GitHub API: Consumo em tempo real para listar e mapear repositórios e linguagens.
 
 📐 Metodologias e Arquitetura
 Componentização Avançada: Separação de responsabilidades (Charts, CardSkill, Sidebar, CardProject).
-
 Clean Architecture: Organização clara e modular para escalar o projeto futuramente.
-
 Motion-First Design: Animações nativas baseadas em interações (hover, scroll, tempo).
-
 Mobile Responsiveness (em progresso): Design pensado para escalabilidade visual.
-
 Design System Visual Futurista: Baseado em conceitos de neon, vidro e sombra dinâmica.
 
 📁 Estrutura de Componentes
@@ -109,18 +93,13 @@ yarn start
 
 🏆 Ideal para...
 Portfólios técnicos de desenvolvedores sêniores
-
 Demonstrações de habilidades analíticas em entrevistas
-
 Apresentações de arquitetura e liderança técnica
-
 Showcase para equipes de DevOps, Fullstack e Engenharia de Software
 
 🧬 Exemplo de stack exibida no radar:
 React.js, Next.js, Node.js, TypeScript, PostgreSQL
-
 C#, Python, Java, Docker, GitHub Actions, Cloud
-
 Arquitetura de Software, QA Lead, Backend e Frontend
 
 📎 Autor
