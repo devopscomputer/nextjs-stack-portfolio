@@ -5,13 +5,14 @@ import type { Configuration } from "webpack";
 const isGithubPages = process.env.DEPLOY_ENV === "GH_PAGES";
 
 const nextConfig: NextConfig = {
-  output: "export", // ativa next export
+  output: "export", // Ativa next export
 
   experimental: {
     forceSwcTransforms: true,
   },
 
   images: {
+    unoptimized: true, // Desativa a otimização de imagens para exportação estática
     remotePatterns: [
       {
         protocol: "https",
@@ -28,7 +29,7 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // ESSENCIAL para funcionar no GitHub Pages
+  // Essencial para funcionar no GitHub Pages
   assetPrefix: isGithubPages ? "/nextjs-stack-portfolio/" : "",
   basePath: isGithubPages ? "/nextjs-stack-portfolio" : "",
   trailingSlash: true,

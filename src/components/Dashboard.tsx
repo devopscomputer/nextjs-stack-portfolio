@@ -5,6 +5,9 @@ import CircleProgress from "./CircleProgress";
 import Chart from "./Chart";
 import Charts from "./Charts";
 import ChartSkill from "./ChartSkill";
+import RadarChart from "./RadarChart";
+import { PolarArea } from "react-chartjs-2";
+import PolarChart from "./PolarChart";
 
 export default function Dashboard() {
   return (
@@ -12,23 +15,36 @@ export default function Dashboard() {
 
       {/* Wrapper dos dois charts */}
       <div className="flex justify-between items-start gap-8 w-full mt-10">
-
-        {/* 
-        <div className="flex-1 relative top-[50px] right-[20px] max-w-[65%] h-[400px]">
-          <Charts />
-        </div>
-
-        <div className="flex-1 relative top-[140px] right-[20px] max-w-[65%] h-[400px]">
-          <Chart />
-        </div>
-        */}
-
+        
         {/* ChartSkill (radar + progress) */}
-        <div className="w-[35%] relative bottom-[12em] left-[25em]">
+        <div className="w-[35%] relative top-[15em] left-[79em] ">
           <ChartSkill />
         </div>
-      </div>
 
+        <div className="w-[35%] absolute right-[4em] top-[-1em] z-10">
+          <RadarChart />
+        </div>
+        <div className="w-[35%] absolute right-[43em] top-[1em] z-10">
+          <PolarChart />
+        </div>
+
+        <div className="flex-1 relative top-[12em] left-[-34em] max-w-[88%] h-[700px]">
+          <Chart />
+        </div>
+      </div>
+      
+      
+    {/*
+<div className="flex-1 relative bottom-[4em] right-[-1em] max-w-[52%] h-[250px]">
+  <Charts />
+</div>
+<div className="flex-1 relative top-[-30em] rigth-[25em] max-w-[68%] h-[600px]">
+          <RadarChart />
+        </div>
+
+*/}
+
+      
       <style jsx>{`
         .glass {
           background: rgba(40, 65, 75, 0.05);

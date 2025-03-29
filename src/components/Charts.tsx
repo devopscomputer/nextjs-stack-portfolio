@@ -2,29 +2,123 @@
 
 import React from "react";
 import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
   Tooltip,
-  ResponsiveContainer,
-  CartesianGrid,
-} from "recharts";
-import { FaBolt, FaCodeBranch, FaDatabase } from "react-icons/fa";
+  Filler,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 import { motion } from "framer-motion";
+import { FaBolt, FaCodeBranch, FaDatabase } from "react-icons/fa";
 
-const data = [
-  { name: "01", a: 10, b: 20, c: 30 },
-  { name: "02", a: 40, b: 25, c: 20 },
-  { name: "03", a: 35, b: 30, c: 25 },
-  { name: "04", a: 50, b: 40, c: 30 },
-  { name: "05", a: 80, b: 65, c: 50 },
-  { name: "06", a: 70, b: 60, c: 45 },
-  { name: "07", a: 60, b: 50, c: 40 },
-  { name: "08", a: 50, b: 40, c: 30 },
-  { name: "09", a: 30, b: 20, c: 15 },
-  { name: "10", a: 20, b: 10, c: 5 },
-];
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend
+);
+
+const data = {
+  labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+  datasets: [
+    {
+      label: "Dataset A",
+      data: [10, 40, 35, 50, 80, 70, 60, 50, 30, 20],
+      fill: true,
+      backgroundColor: (context: any) => {
+        const ctx = context.chart.ctx;
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, "rgba(0,255,136,0.15)");
+        gradient.addColorStop(1, "rgba(0,255,136,0)");
+        return gradient;
+      },
+      borderColor: "#00ff88",
+      tension: 0.4,
+      pointRadius: 3,
+      pointBackgroundColor: "#00ff88",
+      pointHoverRadius: 5,
+    },
+    {
+      label: "Dataset B",
+      data: [20, 25, 30, 40, 65, 60, 50, 40, 20, 10],
+      fill: true,
+      backgroundColor: (context: any) => {
+        const ctx = context.chart.ctx;
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, "rgba(0,185,126,0.15)");
+        gradient.addColorStop(1, "rgba(0,185,126,0)");
+        return gradient;
+      },
+      borderColor: "#00b97e",
+      tension: 0.4,
+      pointRadius: 3,
+      pointBackgroundColor: "#00b97e",
+      pointHoverRadius: 5,
+    },
+    {
+      label: "Dataset C",
+      data: [30, 20, 25, 30, 50, 45, 40, 30, 15, 5],
+      fill: true,
+      backgroundColor: (context: any) => {
+        const ctx = context.chart.ctx;
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, "rgba(0,122,86,0.15)");
+        gradient.addColorStop(1, "rgba(0,122,86,0)");
+        return gradient;
+      },
+      borderColor: "#007a56",
+      tension: 0.4,
+      pointRadius: 3,
+      pointBackgroundColor: "#007a56",
+      pointHoverRadius: 5,
+    },
+  ],
+};
+
+const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false,
+    },
+    tooltip: {
+      backgroundColor: "#111",
+      titleColor: "#00ffcc",
+      bodyColor: "#ccc",
+      borderColor: "#00ff88",
+      borderWidth: 1,
+    },
+  },
+  scales: {
+    x: {
+      grid: { display: false },
+      ticks: {
+        color: "#ccc",
+        font: { size: 12 },
+      },
+    },
+    y: {
+      grid: {
+        drawTicks: false,
+        color: "rgba(0,255,180,0.05)",
+      },
+      ticks: {
+        color: "#ccc",
+        font: { size: 10 },
+      },
+    },
+  },
+};
 
 export default function Charts() {
   return (
@@ -65,62 +159,9 @@ export default function Charts() {
         </motion.div>
       </div>
 
-      <ResponsiveContainer width="100%" height={300}>
-        <AreaChart data={data}>
-          <defs>
-            <linearGradient id="colorA" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#00ff88" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#00ff88" stopOpacity={0} />
-            </linearGradient>
-            <linearGradient id="colorB" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#00b97e" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#00b97e" stopOpacity={0} />
-            </linearGradient>
-            <linearGradient id="colorC" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#007a56" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#007a56" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <CartesianGrid strokeDasharray="3 3" opacity={0.06} />
-          <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 12 }} />
-          <YAxis hide />
-          <Tooltip
-            contentStyle={{ backgroundColor: "#111", border: "none" }}
-            labelStyle={{ color: "#00ffcc" }}
-            itemStyle={{ color: "#ccc" }}
-          />
-          <Area
-            type="monotone"
-            dataKey="a"
-            stackId="1"
-            stroke="#00ff88"
-            fill="url(#colorA)"
-            strokeWidth={2}
-            animationDuration={1200}
-            activeDot={{ r: 5, stroke: "#00ff88", strokeWidth: 2, fill: "#101f1d" }}
-          />
-          <Area
-            type="monotone"
-            dataKey="b"
-            stackId="1"
-            stroke="#00b97e"
-            fill="url(#colorB)"
-            strokeWidth={2}
-            animationDuration={1400}
-            activeDot={{ r: 5, stroke: "#00b97e", strokeWidth: 2, fill: "#101f1d" }}
-          />
-          <Area
-            type="monotone"
-            dataKey="c"
-            stackId="1"
-            stroke="#007a56"
-            fill="url(#colorC)"
-            strokeWidth={2}
-            animationDuration={1600}
-            activeDot={{ r: 5, stroke: "#007a56", strokeWidth: 2, fill: "#101f1d" }}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+      <div className="relative  w-full h-[320px] max-w-[680px] rounded-xl backdrop-blur-md shadow-[0_0_20px_#00ff8844] p-3">
+        <Line data={data} options={options} />
+      </div>
     </div>
   );
 }

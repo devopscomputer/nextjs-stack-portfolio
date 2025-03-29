@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Chart,
   LineElement,
@@ -12,15 +12,30 @@ import {
   Filler,
   ChartOptions,
   ChartData,
-  Plugin
+  Plugin,
+  ChartEvent,
+  ActiveElement,
 } from "chart.js";
 import { motion } from "framer-motion";
-import { FaCode, FaCloud, FaLaptopCode } from "react-icons/fa";
 
-Chart.register(LineElement, LineController, CategoryScale, LinearScale, PointElement, Tooltip, Filler);
+Chart.register(
+  LineElement,
+  LineController,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Tooltip,
+  Filler
+);
 
 export default function ChartComponent() {
   const chartRef = useRef<HTMLCanvasElement>(null);
+  const [activeSkill, setActiveSkill] = useState<{
+    label: string;
+    percent: number;
+    x: number;
+    y: number;
+  } | null>(null);
 
   useEffect(() => {
     const ctx = chartRef.current?.getContext("2d");
@@ -36,10 +51,18 @@ export default function ChartComponent() {
 
     const rawData = [8000, 12000, 5000, 9000, 4000, 11000];
     const max = Math.max(...rawData);
+
+    const overlayPercentRaw = [48, 75, 96, 60, 94, 42];
+    const overlayData = overlayPercentRaw.map((p) => Math.round((p / 100) * max));
+
     const normalized = rawData.map((val) => Math.round((val / max) * 100));
 
+    const labels = ["Frontend", "Backend", "DevOps", "Cloud", "Testing", "UI"];
+
+    
+
     const data: ChartData<"line"> = {
-      labels: ["Frontend", "Backend", "DevOps", "Cloud", "Testing", "UI"],
+      labels,
       datasets: [
         {
           label: "Skills Progress",
@@ -48,27 +71,56 @@ export default function ChartComponent() {
           backgroundColor: gradientFill,
           fill: true,
           tension: 0.4,
-          pointRadius: 0,
-          pointHoverRadius: 6,
+          pointRadius: 4,
+          pointHoverRadius: 8,
           pointHoverBackgroundColor: "#00ffcc",
           pointHoverBorderColor: "#00ffaa",
           borderWidth: 4,
         },
+        {
+          label: "Overlay Guide",
+          data: overlayData,
+          borderColor: "rgba(0, 255, 100, 0.2)",
+          backgroundColor: "transparent",
+          borderWidth: 2,
+          borderDash: [5, 4],
+          pointRadius: 0,
+          tension: 0.4,
+        },
       ],
     };
 
-    const annotations = normalized.map((percent, i) => {
-      const isPeak =
-        i === 0 ||
-        (i > 0 && i < normalized.length - 1 &&
-          normalized[i] > normalized[i - 1] &&
-          normalized[i] > normalized[i + 1]);
-      return isPeak ? { index: i, percent } : null;
-    }).filter(Boolean) as { index: number; percent: number }[];
+    const annotations = normalized
+      .map((percent, i) => {
+        const isPeak =
+          i === 0 ||
+          (i > 0 && i < normalized.length - 1 && normalized[i] > normalized[i - 1] && normalized[i] > normalized[i + 1]);
+        return isPeak ? { index: i, percent } : null;
+      })
+      .filter(Boolean) as { index: number; percent: number }[];
 
     const options: ChartOptions<"line"> = {
       responsive: true,
       maintainAspectRatio: false,
+      interaction: {
+        mode: "nearest",
+        axis: "x",
+        intersect: false,
+      },
+      onClick: (event: ChartEvent, elements: ActiveElement[], chart) => {
+        if (elements.length > 0) {
+          const index = elements[0].index;
+          const label = labels[index];
+          const value = rawData[index];
+          const percent = Math.round((value / max) * 100);
+          const meta = chart.getDatasetMeta(0);
+          const point = meta.data[index];
+          const { x, y } = point.getProps(["x", "y"], true);
+          setActiveSkill({ label, percent, x, y });
+        } else {
+          setActiveSkill(null);
+        }
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -81,7 +133,7 @@ export default function ChartComponent() {
           displayColors: false,
           callbacks: {
             label: function (context) {
-              return `Progress: ${Math.round((context.raw as number) / max * 100)}%`;
+              return `Progress: ${Math.round((context.raw as number / max) * 100)}%`;
             },
           },
         },
@@ -149,35 +201,45 @@ export default function ChartComponent() {
   }, []);
 
   return (
-    <div className="w-full flex flex-col items-center py-10">
+    <div className="w-full flex flex-col relative items-center py-10">
       <motion.h2
         className="text-lg font-semibold text-[#00ff88] text-center tracking-wide uppercase mb-6"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Distribuição de Skills Técnicas
+        Distribuição de Skills Interativas
       </motion.h2>
 
-      <div className="flex justify-around text-[#00ff88] text-sm mb-4">
-        <motion.div className="flex items-center gap-2 hover:scale-105 transition-all duration-300">
-          <FaLaptopCode className="text-[#00ff88] group-hover:animate-pulse" /> Frontend
-        </motion.div>
-        <motion.div className="flex items-center gap-2 hover:scale-105 transition-all duration-300">
-          <FaCode className="text-[#00b97e] group-hover:animate-spin-slow" /> Backend
-        </motion.div>
-        <motion.div className="flex items-center gap-2 hover:scale-105 transition-all duration-300">
-          <FaCloud className="text-[#007a56] group-hover:animate-ping-slow" /> Cloud
-        </motion.div>
-      </div>
-
-      <div className="relative w-full h-[380px] max-w-[1540px] rounded-xl backdrop-blur-md shadow-[0_0_20px_#00ff8844] group">
+      <div className="relative w-full h-[380px] max-w-[740px] rounded-xl backdrop-blur-md shadow-[0_0_20px_#00ff8844] group">
         <canvas
           ref={chartRef}
           className="w-full h-full transition-transform duration-500 group-hover:scale-[1.01]"
           width={1320}
           height={400}
         ></canvas>
+
+        {activeSkill && (
+          <motion.div
+            className="absolute z-10 text-[#00ff88] px-4 py-3 rounded-lg shadow-lg w-[240px]"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            style={{ left: activeSkill.x - 120, top: activeSkill.y - 140 }}
+          >
+            <h4 className="font-bold text-sm mb-1">{activeSkill.label}</h4>
+            <p className="text-xs mb-1">Progresso Atual: {activeSkill.percent}%</p>
+            <div className="text-[10px] text-gray-400 leading-tight">
+              Projeção baseada em curva de performance técnica.<br />
+              <span className="text-[11px] text-cyan-400 font-medium">Clique para expandir detalhes ou comparar.</span>
+            </div>
+            <div className="mt-2 flex justify-end">
+              <button className="text-[10px] px-2 py-1 bg-[#00ff88]/10 border border-[#00ff88] rounded hover:bg-[#00ff88]/20 transition-all">
+                Detalhes
+              </button>
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   );
